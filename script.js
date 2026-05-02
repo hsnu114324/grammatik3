@@ -5,7 +5,7 @@
 
   const BOARD = Object.freeze({ cols: 8, rows: 11 });
   const SHOT_SPEED = 760;
-  const TURN_STEP = Math.PI / 18;
+  const TURN_STEP = Math.PI / 36;
   const COLORS = Object.freeze([
     "#ff7a7a",
     "#ffbe5c",
