@@ -10,22 +10,73 @@
     <main class="settings-page">
       <header class="settings-hero">
         <p class="eyebrow">Settings</p>
-        <h1>選擇題庫</h1>
-        <p class="lead">先簡化成只選群組 1 或群組 2。點選後會直接儲存，回到遊戲重新開始即可套用。</p>
+        <h1>遊戲設定</h1>
+        <p class="lead">選擇題庫來源、分類篩選、每關題數與抽取數。設定會保存在瀏覽器中，回到遊戲重新開始後套用。</p>
       </header>
+
+      <section class="card">
+        <p id="message" class="message" role="status"></p>
+
+        <div class="pick-section">
+          <div class="section-head">
+            <span class="section-dot"></span>
+            <h3>題庫來源</h3>
+            <small>可同時啟用多個</small>
+          </div>
+          <div id="groupBtnBar" class="pill-bar" aria-label="題庫來源"></div>
+        </div>
+
+        <div class="pick-section" id="catSection" hidden>
+          <div class="section-head">
+            <span class="section-dot"></span>
+            <h3>分類篩選</h3>
+            <small>不選則全部</small>
+          </div>
+          <div id="catBar" class="pill-bar" aria-label="分類篩選"></div>
+        </div>
+
+        <div class="pick-row">
+          <div class="pick-section">
+            <div class="section-head">
+              <span class="section-dot"></span>
+              <h3>每關題數</h3>
+            </div>
+            <select id="levelSizeSetting" class="pill-input">
+              <option value="4">4 題</option>
+              <option value="6">6 題</option>
+              <option value="8">8 題</option>
+              <option value="10">10 題</option>
+            </select>
+          </div>
+
+          <div class="pick-section">
+            <div class="section-head">
+              <span class="section-dot"></span>
+              <h3>每局抽取</h3>
+              <small>0 = 全部</small>
+            </div>
+            <div class="pick-inline">
+              <input id="pickCount" class="pill-input" type="number" min="0" step="1" value="0" />
+              <span class="muted">共 <b id="totalCount">0</b> 題可用</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="saveBtn" type="button" class="primary">儲存設定</button>
+          <button id="saveAndBackBtn" type="button" class="accent">儲存並回遊戲</button>
+          <button id="resetBtn" type="button" class="ghost">恢復預設</button>
+          <a class="btn-link" href="./index.html">返回遊戲</a>
+        </div>
+      </section>
 
       <section class="card">
         <div class="section-head">
           <span class="section-dot"></span>
-          <h3>題庫群組</h3>
-          <small>單選</small>
+          <h3>題庫內容預覽</h3>
+          <small id="datasetCount">載入中</small>
         </div>
-        <div id="groupBtnBar" class="pill-bar" aria-label="題庫群組"></div>
-        <p id="message" class="message" role="status"></p>
-
-        <div class="actions">
-          <a class="btn-link" href="./index.html">返回遊戲</a>
-        </div>
+        <div id="datasetList" class="dataset-list"></div>
       </section>
     </main>
 
