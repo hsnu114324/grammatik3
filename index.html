@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>德文文字泡泡拼圖</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Deutsch Bubble Puzzle</p>
+          <h1>德文文字泡泡拼圖</h1>
+          <p class="lead">每題會先排成一排 5~6 顆德文泡泡並挖空；答題時把缺的泡泡接回同組，全部連在一起就會消除。輔助線可幫助瞄準反彈路徑。</p>
+        </div>
+        <div class="stats" aria-label="遊戲狀態">
+          <span>分數 <b id="score">0</b></span>
+          <span>關卡 <b id="level">1</b></span>
+          <span>進度 <b id="progress">0/0</b></span>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="資料與關卡控制">
+        <label>
+          德文資料
+          <select id="groupSelect"></select>
+        </label>
+        <label>
+          每關題數
+          <select id="levelSizeSelect">
+            <option value="4">4</option>
+            <option value="6" selected>6</option>
+            <option value="8">8</option>
+            <option value="10">10</option>
+          </select>
+        </label>
+        <a class="btn-link" href="./settings.html">設定頁</a>
+        <button id="restartBtn" type="button">重新開始</button>
+      </section>
+
+      <section class="game-layout">
+        <aside class="panel">
+          <div class="panel-heading">
+            <h2>本關題目列</h2>
+            <span id="rowCount">0 列</span>
+          </div>
+          <div id="targets" class="targets" aria-live="polite"></div>
+        </aside>
+
+        <section class="board-card">
+          <canvas id="board" aria-label="泡泡遊戲盤"></canvas>
+          <div class="next-card">
+            <span>下一顆泡泡</span>
+            <b id="nextBubble">載入中</b>
+          </div>
+          <p id="message" class="message" role="status"></p>
+          <div class="controls" aria-label="發射控制">
+            <button id="leftBtn" type="button">左轉</button>
+            <button id="fireBtn" type="button">發射</button>
+            <button id="rightBtn" type="button">右轉</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>
