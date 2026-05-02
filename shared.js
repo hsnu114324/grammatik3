@@ -7,6 +7,7 @@
     defaultLevelSize: 6,
     levelSizeOptions: [4, 6, 8, 10],
     storageKeys: Object.freeze({
+      wordData: "german_bubble_word_data_v1",
       datasetIds: "german_bubble_dataset_v1",
       levelSize: "german_bubble_level_size_v1",
       pickCount: "german_bubble_pick_count_v1",
@@ -134,7 +135,7 @@
       id: set.id,
       label: set.label,
       rows: Array.from({ length: set.count }, (_, index) => ({
-          row: index === 0 ? "請用本機靜態伺服器開啟以查看題目範例" : "",
+          row: index === 0 ? "找不到題庫資料，請先在設定頁載入 data/words.json" : "",
           sourceIndex: index,
           tokens: [],
           key: `${set.id}-${index}`,
@@ -160,7 +161,34 @@
   async function fetchWordData() {
     const response = await fetch("./data/words.json");
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
+    const data = await response.json();
+    saveWordDataCache(data);
+    return data;
+  }
+
+  function isValidWordData(data) {
+    return Boolean(data && Array.isArray(data.groups));
+  }
+
+  function loadWordDataCache() {
+    try {
+      const raw = localStorage.getItem(CONFIG.storageKeys.wordData);
+      if (!raw) return null;
+      const data = JSON.parse(raw);
+      return isValidWordData(data) ? data : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function saveWordDataCache(data) {
+    if (!isValidWordData(data)) return null;
+    localStorage.setItem(CONFIG.storageKeys.wordData, JSON.stringify(data));
+    return data;
+  }
+
+  function clearWordDataCache() {
+    localStorage.removeItem(CONFIG.storageKeys.wordData);
   }
 
   function parseJsonArray(value) {
@@ -307,16 +335,19 @@
     getSelectedRows,
     isPlayableRow,
     loadSettings,
+    loadWordDataCache,
     normalizeText,
     normalizeTokens,
     parseRows,
     resetSettings,
     saveSettings,
+    saveWordDataCache,
     sanitizeCategoryIds,
     sanitizeDatasetIds,
     sanitizeLevelSize,
     sanitizePickCount,
     shouldShowCategories,
     shuffle,
+    clearWordDataCache,
   });
 })();

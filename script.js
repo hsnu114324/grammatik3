@@ -71,13 +71,20 @@
   }
 
   async function loadData() {
+    const cachedData = Shared.loadWordDataCache();
+    if (cachedData) {
+      state.dataSets = Shared.buildDataSets(cachedData);
+      resetGame();
+      return;
+    }
+
     try {
       const rawData = await Shared.fetchWordData();
       state.dataSets = Shared.buildDataSets(rawData);
     } catch (error) {
       console.warn("載入 data/words.json 失敗，使用內建範例。", error);
       state.dataSets = Shared.buildPlayableFallbackDataSet();
-      setMessage("無法讀取 data/words.json，已改用內建範例。若要讀正式資料，請用本機靜態伺服器開啟。");
+      setMessage("無法讀取 data/words.json，也沒有題庫快取，已改用內建範例。請先到設定頁載入 JSON。");
     }
 
     if (state.dataSets.length === 0) {

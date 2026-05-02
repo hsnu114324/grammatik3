@@ -26,10 +26,17 @@
     try {
       const rawData = await Shared.fetchWordData();
       state.dataSets = Shared.buildDataSets(rawData);
+      setMessage("已從 data/words.json 載入題庫並儲存到瀏覽器。", true);
     } catch (error) {
       console.error("設定資料載入失敗:", error);
-      state.dataSets = Shared.buildFallbackMetaDataSets();
-      setMessage("無法載入 data/words.json（直接開檔會被瀏覽器擋住）。仍可儲存設定，遊戲請用本機靜態伺服器開啟。");
+      const cachedData = Shared.loadWordDataCache();
+      if (cachedData) {
+        state.dataSets = Shared.buildDataSets(cachedData);
+        setMessage("無法重新讀取 data/words.json，已使用上次儲存的題庫快取。", true);
+      } else {
+        state.dataSets = Shared.buildFallbackMetaDataSets();
+        setMessage("無法載入 data/words.json，且尚未有題庫快取。請先在可讀取 JSON 的環境開啟一次設定頁。");
+      }
     }
 
     state.dataSets = state.dataSets.filter((dataSet) => VISIBLE_GROUP_IDS.includes(dataSet.id));
