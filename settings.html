@@ -3,65 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>德文泡泡拼圖 設定</title>
+    <title>德文泡泡拼圖・遊戲設定</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="settings-page">
+      <header class="settings-hero">
+        <p class="eyebrow">Settings</p>
+        <h1>選擇題庫</h1>
+        <p class="lead">先簡化成只選群組 1 或群組 2。點選後會直接儲存，回到遊戲重新開始即可套用。</p>
+      </header>
+
       <section class="card">
-        <h1>遊戲設定</h1>
-        <p>選擇題庫來源與每關題數。設定會保存在瀏覽器，下次開啟遊戲會自動套用。</p>
-        <p id="message" class="message"></p>
-
-        <div class="pick-section">
-          <p class="pick-label" style="margin-bottom:6px;font-weight:bold;">題庫來源（可同時啟用多個）</p>
-          <div id="groupBtnBar" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
+        <div class="section-head">
+          <span class="section-dot"></span>
+          <h3>題庫群組</h3>
+          <small>單選</small>
         </div>
-
-        <div class="pick-section" id="catSection" style="display:none;">
-          <p class="pick-label" style="margin-bottom:6px;font-weight:bold;">分類篩選</p>
-          <div id="catBar" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
-        </div>
-
-        <div class="pick-section">
-          <label class="pick-label">
-            每關題數
-            <select id="levelSizeSetting">
-              <option value="4">4</option>
-              <option value="6">6</option>
-              <option value="8">8</option>
-              <option value="10">10</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="pick-section">
-          <label class="pick-label">
-            每局隨機抽取
-            <input id="pickCount" type="number" min="0" step="1" value="0" />
-            組（0 = 全部）
-          </label>
-          <span>共 <b id="totalCount">0</b> 題可用</span>
-        </div>
+        <div id="groupBtnBar" class="pill-bar" aria-label="題庫群組"></div>
+        <p id="message" class="message" role="status"></p>
 
         <div class="actions">
-          <button id="saveBtn" type="button">儲存設定</button>
-          <button id="resetBtn" type="button">恢復預設</button>
-          <a class="btn-link" href="./index.html">回遊戲</a>
-        </div>
-
-        <hr style="margin:16px 0;border:none;border-top:1px solid rgba(126,166,255,0.2);" />
-
-        <div class="pick-section">
-          <div class="panel-heading">
-            <h2>題庫內容預覽</h2>
-            <span id="datasetCount">載入中</span>
-          </div>
-          <div id="datasetList" class="dataset-list"></div>
+          <a class="btn-link" href="./index.html">返回遊戲</a>
         </div>
       </section>
     </main>
 
+    <script src="./shared.js" defer></script>
     <script src="./settings.js" defer></script>
   </body>
 </html>
+

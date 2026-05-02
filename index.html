@@ -12,7 +12,7 @@
         <div>
           <p class="eyebrow">Deutsch Bubble Puzzle</p>
           <h1>德文文字泡泡拼圖</h1>
-          <p class="lead">每題會先排成一排 5~6 顆德文泡泡並挖空；答題時把缺的泡泡接回同組，全部連在一起就會消除。輔助線可幫助瞄準反彈路徑。</p>
+          <p class="lead">每題會先排成一排德文泡泡並挖空；答題時把缺的泡泡接回同組，全部連在一起就會消除。輔助線可幫助瞄準反彈路徑。題庫請至 <a href="./settings.html" class="text-link">設定頁</a> 調整。</p>
         </div>
         <div class="stats" aria-label="遊戲狀態">
           <span>分數 <b id="score">0</b></span>
@@ -21,22 +21,9 @@
         </div>
       </header>
 
-      <section class="toolbar" aria-label="資料與關卡控制">
-        <label>
-          德文資料
-          <select id="groupSelect"></select>
-        </label>
-        <label>
-          每關題數
-          <select id="levelSizeSelect">
-            <option value="4">4</option>
-            <option value="6" selected>6</option>
-            <option value="8">8</option>
-            <option value="10">10</option>
-          </select>
-        </label>
-        <a class="btn-link" href="./settings.html">設定頁</a>
-        <button id="restartBtn" type="button">重新開始</button>
+      <section class="toolbar" aria-label="遊戲控制">
+        <a class="btn-link" href="./settings.html">遊戲設定</a>
+        <button id="restartBtn" type="button" class="primary">重新開始</button>
       </section>
 
       <section class="game-layout">
@@ -64,6 +51,7 @@
       </section>
     </main>
 
+    <script src="./shared.js" defer></script>
     <script src="./script.js" defer></script>
   </body>
 </html>
