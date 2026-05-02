@@ -861,15 +861,20 @@
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.repeat && (event.key === " " || event.key === "Enter")) return;
       const key = event.key.toLowerCase();
-      if (key === "arrowleft" || key === "a") {
+      const code = event.code;
+      const isLeft = key === "arrowleft" || key === "a" || code === "KeyA";
+      const isRight = key === "arrowright" || key === "d" || code === "KeyD";
+      const isFire = key === " " || key === "enter" || key === "w" || key === "s" || code === "Space" || code === "Enter" || code === "KeyW" || code === "KeyS";
+      if (event.repeat && isFire) return;
+
+      if (isLeft) {
         event.preventDefault();
         rotateAim(-TURN_STEP);
-      } else if (key === "arrowright" || key === "d") {
+      } else if (isRight) {
         event.preventDefault();
         rotateAim(TURN_STEP);
-      } else if (key === " " || key === "enter" || key === "w" || key === "s") {
+      } else if (isFire) {
         event.preventDefault();
         fireBubble();
       }
